@@ -4,6 +4,7 @@ const logger = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const hbs = require('hbs')
 const { connect, connection } = require('./db/models');
 
 const indexRouter = require('./routes/indexRouter');
@@ -15,7 +16,7 @@ const app = express();
 
 app.set('view engine', 'hbs');
 app.set('views', path.join(process.env.PWD, 'views'));
-
+hbs.registerPartials(path.join(process.env.PWD, 'views', 'partials'))
 app.use(logger('dev'));
 app.use(express.static(path.join(process.env.PWD, 'public')));
 app.use(express.urlencoded({ extended: true }));

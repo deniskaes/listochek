@@ -1,0 +1,13 @@
+.page {
+  margin: 0;
+  padding: 0;
+  max-width: 670px;
+  min-width: 320px;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  align-content: center;
+  justify-items: flex-start;
+  justify-content: space-between;
+}

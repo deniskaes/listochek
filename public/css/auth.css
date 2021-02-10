@@ -1,0 +1,58 @@
+.form__main {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.form__register {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+  align-content: center;
+  justify-items: center;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form__register__input {
+  margin: 15px 0 0 0; 
+  width: 80%;
+  height: 5%;
+  text-align: center;
+}
+
+.form__action {
+  margin: 20px 0 0 0;
+  padding: 0;
+  width: 80%;
+  height: 5%;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+
+.form__register__logIn {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  height: 35px;
+  border-radius: 15px;
+  background-color: green;
+}
+
+.form__register__send {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  height: 35px;
+  border-radius: 15px;
+  background-color: green;
+}

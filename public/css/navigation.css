@@ -1,0 +1,10 @@
+.navigation {
+  margin: 0;
+  padding: 0;
+  background-color: green;
+  width: 100vw;
+  height: 10vh;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
