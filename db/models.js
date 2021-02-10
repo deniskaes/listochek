@@ -5,7 +5,7 @@ pluralize(null);
 const userSchema = new Schema({
   firstName: String,
   secondName: String,
-  login: String,
+  email: String,
   password: String,
 });
 
