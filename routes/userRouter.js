@@ -36,6 +36,10 @@ router.post('/login', async (req, res) => {
   }
 });
 
-
+router.get('/logout', (req,res)=>{
+  req.session.destroy();
+  res.clearCookie('sid');
+  res.redirect('/user/login');
+});
 
 module.exports = router;
