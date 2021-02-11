@@ -1,7 +1,7 @@
 const formLogin = document.querySelector('#form__login');
 const formRegister = document.querySelector('#form__register');
-console.log(formRegister);
 
+if (formRegister) {
   formRegister.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(formRegister).entries());
@@ -19,8 +19,9 @@ console.log(formRegister);
       alert('wrong any');
     }
   });
+}
 
-
+if (formLogin) {
   formLogin.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(formLogin).entries());
@@ -37,3 +38,4 @@ console.log(formRegister);
       alert('wrong any');
     }
   });
+}
