@@ -3,15 +3,14 @@
     {{#if userList}}
     <ul>
       {{#each userList}}
-        <li data-note="listItems"  class="list__items"  id={{this._id}}>{{this.title}}</li>
+      <li data-note="listItems" class="list__items" id={{this._id}}>{{this.title}}</li>
       {{/each}}
     </ul>
     {{else}}
     <h2>List empty</h2>
     {{/if}}
   </div>
-  <div class="show__list">
-
+  <div id="show__list" class="show__list show__list_hide">
   </div>
   <div id="show__group" class="show__group hide">group</div>
   <div id="show__addList" class="show__addList hide">
@@ -58,12 +57,22 @@
 </template>
 
 <template id="itemsListTemplate">
-  <div class="element_list">
-    <h2 class="element_list__title"></h2>
-    <ul class="element_list__goods_list"></ul>
+  <div id="element_list" class="element_list">
+    <div class="element_list_menu">
+      <h2 id="element__list_title" class="element_menu__title"></h2>
+      <div class="menu__action">
+        <button type="button" id="element_list__action_cancel" class="element_menu__action_cancel">cancel</button>
+        <button type="button" id="element_list__action_save" class="element_list__action_save">Save</button>
+      </div>
+    </div>
+    <ul id="element__list_lists" class="element_list__goods_list"></ul>
   </div>
 </template>
 
-<template id="element_list__goods">
-  <li class="element_list__goods_links"><button type="button" class="element_list__goods_link"></button></li>
+<template id="element_list__items">
+  <li class="element_list__goods_links">
+    <button id="elements__items_link" type="button"
+      class="element_list__goods_link"></button>
+    <button id="items_edit" class="items__edits" type="button">Buy</button>
+  </li>
 </template>
