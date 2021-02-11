@@ -1,0 +1,20 @@
+.show__addList {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.hide {
+  display: none;
+}
+
+.addList_form {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+}

@@ -28,9 +28,11 @@ router.post('/login', async (req, res) => {
   try {
   const { email, password } = req.body;
   const userDb = await User.findOne({ email });
-  if (userDb && (await bcrypt.compare(password, userDb.password))) 
-    req.session.user = userDb;
-  return res.sendStatus(200);
+    if (userDb && (await bcrypt.compare(password, userDb.password))) {
+      req.session.user = userDb;
+      return res.sendStatus(200);
+    }
+    return res.sendStatus(500);
   } catch (error) {
     return res.sendStatus(500);
   }
@@ -38,8 +40,7 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req,res)=>{
   req.session.destroy();
-  res.clearCookie('sid');
-  res.redirect('/user/login');
+  res.clearCookie('sid').sendStatus(200);
 });
 
 module.exports = router;

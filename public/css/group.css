@@ -1,0 +1,7 @@
+.show__group {
+  display: flex;
+}
+
+.hide {
+  display: none;
+}

@@ -1,14 +1,45 @@
 <div class="main">
-  <div id="profile" class="profile profile__hide">
+  <div id="show__lists" class="show__lists">list</div>
+  <div id="show__group" class="show__group hide">group</div>
+  <div id="show__addList" class="show__addList hide">
+    <form action="/list" class="addList_form" method="POST">
+      <input type="text" name="addList_form__title" placeholder="Название Списка">
+      <div id="goods__list" class="addList_form__goods">
+        <div id="goods__item" class="items_form__goods">
+          <input class="addList_form__input_goods" type="text" name="goods" placeholder="Название покупки"></input>
+          <button id="add__goods_btn_add" type="button" class="add__goods">+</button>
+        </div>
+      </div>
+      <div class="addList_form__action">
+        <button id="addList_form__cancel" type="reset" class="addList_form__cancel">cancel</button>
+        <button class="addList_form__submit">send</button>
+      </div>
+    </form>
+  </div>
+  <div id="show__profile" class="profile hide">
     <ul class="profile__list">
-      <li class="profile__links"><h2 class="profile__name">{{userData.firstName}} {{userData.secondName}}</h2></li>
+      <li class="profile__links">
+        <h2 class="profile__name">{{userData.firstName}} {{userData.secondName}}</h2>
+      </li>
       <li class="profile__links">
         <h2 class="profile__email">{{userData.email}}</h2>
       </li>
-      </ul><li class="profile__links"><button id="group" class="profile__link">Мои группы</button></li>
-      </ul><li class="profile__links"><button id="list" class="profile__link">Мои списки</button></li>
-      </ul><li class="profile__links"><button id="logout" class="profile__link">LogOut</button></li>
-      </ul>
-      </ul>
+    </ul>
+    <li class="profile__links"><button id="profile__group" class="profile__link">Мои группы</button></li>
+    </ul>
+    <li class="profile__links"><button id="profile__list" class="profile__link">Мои списки</button></li>
+    </ul>
+    <li class="profile__links"><button id="logout" class="profile__link">LogOut</button></li>
+    </ul>
+    </ul>
   </div>
 </div>
+
+{{!-- // template --}}
+<template id="newItemsGoods">
+  <div id="goods__item" class="items_form__goods">
+    <input class="addList_form__input_goods" type="text" name="goods" placeholder="Название покупки"></input>
+    <button id="add__goods_btn_add" type="button" class="add__goods">+</button>
+    <button id="add__goods_btn_delete" type="button" class="add__goods">-</button>
+  </div>
+</template>

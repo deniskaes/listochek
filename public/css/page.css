@@ -10,4 +10,6 @@
   align-content: center;
   justify-items: flex-start;
   justify-content: space-between;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }

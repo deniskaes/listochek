@@ -1,11 +1,13 @@
-const profile = document.querySelector('#profile');
+const profile = document.querySelector('#show__profile');
 
 if (profile) {
   profile.addEventListener('click', async (e) => {
     switch (e.target.id) {
-      case 'group':
+      case 'profile__group':
+        showGroup();
         break;
-      case 'list':
+      case 'profile__list':
+        showList();
         break;
       case 'logout':
         logout();
@@ -17,8 +19,9 @@ if (profile) {
   })
 }
 
-function logout(){
-  fetch('/user/logout');
+async function logout(){
+  await fetch('/user/logout');
+  window.location.replace('/user/login');
 }
 
 

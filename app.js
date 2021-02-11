@@ -28,7 +28,7 @@ const sesionOptions = {
   store: new MongoStore({ mongooseConnection: connection }),
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60 * 30 * 1000 }
+  cookie: { maxAge: 60 * 30 * 10000 }
 }
 
 app.use(session(sesionOptions));
