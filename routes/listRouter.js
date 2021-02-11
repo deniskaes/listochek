@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
     const newList = new List({ title: addList_form__title, goods: goodsArrayObj, user: res.locals.user._id });
     console.log(newList);
     await newList.save();
-    res.sendStatus(200);
+    res.redirect('/')
   } catch (error) {
     res.sendStatus(500)
   }
