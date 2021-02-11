@@ -1,42 +1,39 @@
 const formLogin = document.querySelector('#form__login');
-const formLoginformRegister = document.querySelector('#form__register');
+const formRegister = document.querySelector('#form__register');
+console.log(formRegister);
 
-if (formRegister) {
-  formMain.addEventListener('submit', async (e) => {
-    e.preventDefault()
-    const data = Object.fromEntries(new FormData(formRegister).entries);
-    const result = await fetch('/user/register', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data) ,
-    });
-
-    if (result.status === 200) {
-      window.location.replace('/')
-    } else {
-      alert('wrong any')
-    }
-
-  });
-}
-
-if (formLogin) {
-  formMain.addEventListener('submit', (e) => {
+  formRegister.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(formLogin).entries);
-    const result = await fetch('/user/login', {
-      method: 'post',
+    const data = Object.fromEntries(new FormData(formRegister).entries());
+    const result = await fetch('/user/register', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data) ,
+      body: JSON.stringify(data),
     });
+
     if (result.status === 200) {
-      window.location.replace('/')
+      window.location.replace('/');
     } else {
-      alert('wrong any')
+      alert('wrong any');
     }
   });
-}
+
+
+  formLogin.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(formLogin).entries());
+    const result = await fetch('/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (result.status === 200) {
+      window.location.replace('/');
+    } else {
+      alert('wrong any');
+    }
+  });
