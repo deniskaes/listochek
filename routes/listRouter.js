@@ -32,5 +32,18 @@ router.get('/:idList', async (req, res) => {
   } catch (error) {
     res.sendStatus(500);
   }
-})
+});
+
+router.post('/update', async (req, res) => {
+  const { _id } = req.body
+  try {
+    const listDb = await List.findById(_id).populate('guestList').populate('group');
+    const updatedList = await List.findByIdAndUpdate(_id, { ...req.body });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 module.exports = router;
