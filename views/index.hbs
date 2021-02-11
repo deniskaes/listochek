@@ -1,5 +1,19 @@
 <div class="main">
-  <div id="show__lists" class="show__lists">list</div>
+  <div id="show__lists" class="show__lists">
+    {{#if userList}}
+    <ul>
+      {{#each}}
+        {{#if userList.goods.isCompleted}}
+        <li class="list__items_completed">userList.title</li>
+        {{else}}
+        <li class="list__items_no_completed">userList.title</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+    {{else}}
+    <h2>List empty</h2>
+    {{/if}}
+  </div>
   <div id="show__group" class="show__group hide">group</div>
   <div id="show__addList" class="show__addList hide">
     <form action="/list" class="addList_form" method="POST">
