@@ -25,13 +25,17 @@ router.get('/login', (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+  try {
   const { email, password } = req.body;
   const userDb = await User.findOne({ email });
-  if (userDb && (await bcrypt.compare(password, userDb.password))) {
+  if (userDb && (await bcrypt.compare(password, userDb.password))) 
     req.session.user = userDb;
-    return res.redirect('/');
+  return res.sendStatus(200);
+  } catch (error) {
+    return res.sendStatus(500);
   }
-  return res.render('login');
 });
+
+
 
 module.exports = router;

@@ -33,6 +33,7 @@ if (formLogin) {
       body: JSON.stringify(data),
     });
     if (result.status === 200) {
+      console.log('log');
       window.location.replace('/');
     } else {
       alert('wrong any');
