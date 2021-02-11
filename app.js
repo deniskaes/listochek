@@ -4,7 +4,7 @@ const logger = require('morgan');
 const path = require('path');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const hbs = require('hbs')
+const hbs = require('hbs');
 const { connect, connection } = require('./db/models');
 
 const indexRouter = require('./routes/indexRouter');
@@ -49,8 +49,8 @@ app.use('/list', listRouter);
 
 app.listen(process.env.PORT, () => {
   console.log('server up');
-  connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true },
+  connect(process.env.DB_REMOTE_URL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
     () => {
       console.log('DB connected');
     })
-})
+});
