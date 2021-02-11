@@ -1,13 +1,52 @@
-const { Telegraf, session, Markup, Scenes: { BaseScene, Stage } } = require('telegraf');
+const { Telegraf, session, Markup, Extra, Scenes: { BaseScene, Stage } } = require('telegraf');
 const mongoose = require('mongoose');
 const { User } = require('./db/models');
 const fetch = require('node-fetch');
+const bcrypt = require('bcrypt');
+// const SceneGenerator = require('./scenes');
+// const curScene = new SceneGenerator();
+// const loginScene = curScene.loginScene('register');
+ 
 // const { inline_keyboard, likes } = require('./keyboard');
 // const apis = require('./apis');
 
 // mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const stage = new Stage();
+const loginScene = new BaseScene('login');
+loginScene.enter(ctx => ctx.reply('Давай привяжем ваш аккаунт к вашему телеграмм каналу. Укажи свой email на нашем сайте'));
+loginScene.on('text', async (ctx) => {
+  const emailFromMessages = ctx.message.text.toLowerCase();
+  try {
+    const user = await User.findOne({email: emailFromMessages });
+    if (user) {
+      ctx.session.email = emailFromMessages;
+      await ctx.reply('Все супер! Введите пароль.');
+      ctx.scene.enter('password')
+    } else {
+      await ctx.reply('Пользователь не найден.');
+      ctx.scene.reenter();
+    }
+  } catch (error) {
+    await ctx.reply('Проблемы с подключением.')
+  }
+  
+})
+
+const passwordScene = new BaseScene('password');
+passwordScene.on('text', async (ctx) => {
+  const user = await User.findOne({email: ctx.session.email });
+  const passwordFromMessages = ctx.message.text;
+  if (await bcrypt.compare(passwordFromMessages, user.password)) {
+    user.telegramID = Number(ctx.message.chat.id);
+    await user.save();
+    await ctx.reply('Ваши аккаунты успешно связаны.');
+    ctx.scene.leave();
+    } else {
+    await ctx.reply('Неправильный пароль.');
+  }
+})
+
+const stage = new Stage([loginScene, passwordScene]);
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 bot.use(session());
@@ -19,6 +58,7 @@ bot.use(((ctx, next) => {
 bot.use(Telegraf.log());
 bot.telegram.sendMessage(process.env.CHAT_ID, 'Что бы начать нажми /start');
 
+
 bot.start(async (ctx) => {
   const { id, first_name, last_name, username } = ctx.message.from;
   // let user = await User.findOne({ id });
@@ -27,9 +67,15 @@ bot.start(async (ctx) => {
   //   await user.save();
   // }
   // ctx.session.user = user;
-  ctx.reply(`Приветству, ${ctx.message.from.first_name}!`);
+  ctx.reply(`Приветствую, ${ctx.message.from.first_name}! Чтобы войти в аккаунт, нажми /login`);
   // Что желаешь сделать? Выбирай!`, inline_keyboard);
 });
+bot.command('/login', async (ctx) => {
+  ctx.scene.enter('login')
+})
+bot.on('message', async (ctx) => {
+  console.log("Айди чата", ctx.message.chat.id, "Текст сообщения", ctx.message.text);
+})
 
 
 // bot.action('fox', async (ctx) => {

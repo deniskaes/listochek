@@ -7,6 +7,7 @@ const userSchema = new Schema({
   secondName: String,
   email: { type: String, unique: true },
   password: String,
+  telegramID: String,
 });
 
 const listSchema = new Schema({
