@@ -24,4 +24,14 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  const userDb = await User.findOne({ email });
+  if (userDb && (await bcrypt.compare(password, userDb.password))) {
+    req.session.user = userDb;
+    return res.redirect('/');
+  }
+  return res.render('login');
+});
+
 module.exports = router;

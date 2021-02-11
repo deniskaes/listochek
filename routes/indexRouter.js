@@ -1,8 +1,10 @@
 const router = require('express').Router();
+const { User, List, Group } = require('../db/models');
 
 router.get('/', async (req, res) => {
   if (req.session?.user) {
-   return res.render('index')
+    const userData = await List.find({ user: res.locals.user._id }).populate('group').populate('guestList').populate('user');
+    return res.render('index', { userData })
   }
   return res.render('login')
 })
