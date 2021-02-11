@@ -11,6 +11,10 @@ const userSchema = new Schema({
 
 const listSchema = new Schema({
   title: String,
+  goods: [{
+    title: String,
+    isCompleted: Boolean,
+  }],
   user: {
     type: Schema.Types.ObjectId,
     ref: 'user',
@@ -24,6 +28,7 @@ const listSchema = new Schema({
     ref: 'group'
   }
 });
+
 const groupSchema = new Schema({
   name: String,
   users: [{
