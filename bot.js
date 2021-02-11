@@ -31,7 +31,6 @@ bot.start(async (ctx) => {
   // Что желаешь сделать? Выбирай!`, inline_keyboard);
 });
 
-bot.on
 
 // bot.action('fox', async (ctx) => {
 //   ctx.session.url = apis[3] + String(Math.floor(Math.random() * 122));;
