@@ -6,7 +6,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const hbs = require('hbs');
 const { connect, connection } = require('./db/models');
- require('./bot');
+//  require('./bot');
 
 const indexRouter = require('./routes/indexRouter');
 const groupRouter = require('./routes/groupRouter');
