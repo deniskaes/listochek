@@ -12,7 +12,7 @@ loginScene.on('text', async (ctx) => {
     const user = await User.findOne({ email: emailFromMessages });
     if (user) {
       ctx.session.email = emailFromMessages;
-      await ctx.reply('Все супер! Введите пароль.');
+      await ctx.reply('Все супер! Введите пароль, указанный на сайте.');
       ctx.scene.enter('password')
     } else {
       await ctx.reply('Пользователь не найден.');
