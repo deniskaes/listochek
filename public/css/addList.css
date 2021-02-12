@@ -182,6 +182,7 @@
   border: none;
   text-align: center;
   width: 90%;
+  color: green;
 }
 
 .items__edits {
@@ -196,10 +197,6 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
-}
-
-.completed {
-  color: green;
 }
 
 .completed_false {

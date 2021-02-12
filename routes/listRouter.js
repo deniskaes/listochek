@@ -40,8 +40,19 @@ router.get('/:idList', async (req, res) => {
 router.post('/update', async (req, res) => {
   const { _id } = req.body
   try {
-    const listDb = await List.findById(_id).populate('guestList').populate('group');
+    const listDb = await List.findById(_id).populate('guestList').populate('user');
     const updatedList = await List.findByIdAndUpdate(_id, { ...req.body });
+    listDb.guestList.forEach(async (el)=>{
+      const userDb = await User.findById(el);
+      if (userDb && userDb.telegramID){
+        bot.telegram.sendMessage(userDb.telegramID, `Обноивлся список ${updatedList.title}`);
+      }
+    });
+    console.log(listDb.user);
+    if (listDb.user.telegramID){
+      console.log('adsasdads');
+    bot.telegram.sendMessage(listDb.user.telegramID, `Обноивлся список ${updatedList.title}`);
+    }
     res.sendStatus(200);
   } catch (error) {
     console.log(error);

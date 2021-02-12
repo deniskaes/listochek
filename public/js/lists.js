@@ -32,14 +32,15 @@ async function showList(id) {
     const elementListItems = document
       .querySelector('#element_list__items')
       .content.cloneNode(true); // элемент списка покупок
+    elementListItems.querySelector('.element_list__goods_links').id = element._id;
     const elementsItemsLink = elementListItems.querySelector(
       '#elements__items_link',
     );
     elementsItemsLink.textContent = element.title;
     if (element.isCompleted) {
-      elementsItemsLink.classList.add('.completed');
+      elementsItemsLink.classList.add('completed');
     } else {
-      elementsItemsLink.classList.add('.completed_false');
+      elementsItemsLink.classList.add('completed_false');
     }
     elementList.append(elementListItems);
   });
@@ -75,6 +76,19 @@ if (showListsItem) {
 
     if (e.target.id === 'element_list__action_invite_group') {
       inviteGroup(idList);
+    }
+
+    if (e.target.id === 'items_edit') {
+      console.log('asxasxasx');
+      const buyButton = e.target.parentElement;
+      console.log(buyButton);
+      const itemsName = buyButton.querySelector('#elements__items_link');
+      itemsName.classList.toggle('completed_false');
+      listBase.goods.map(el => {
+        if (el._id === buyButton.id) {
+          el.isCompleted = !el.isCompleted;
+        }
+      })
     }
   });
 }
