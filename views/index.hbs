@@ -1,9 +1,12 @@
 <div class="main">
+  <div id="massege" class="massege massege_hide">
+
+  </div>
   <div id="show__lists" class="show__lists">
     {{#if userList}}
-    <ul>
+    <ul class="list__items">
       {{#each userList}}
-      <li data-note="listItems" class="list__items" id={{this._id}}>{{this.title}}</li>
+      <li data-note="listItems" class="list__item" id={{this._id}}>{{this.title}}</li>
       {{/each}}
     </ul>
     {{else}}
@@ -28,7 +31,7 @@
       </div>
     </form>
   </div>
-  <div id="show__profile" class="profile hide">
+  <div id="show__profile" class="show__profile hide">
     <ul class="profile__list">
       <li class="profile__links">
         <h2 class="profile__name">{{userData.firstName}} {{userData.secondName}}</h2>
@@ -61,8 +64,10 @@
     <div class="element_list_menu">
       <h2 id="element__list_title" class="element_menu__title"></h2>
       <div class="menu__action">
-        <button type="button" id="element_list__action_cancel" class="element_menu__action_cancel">cancel</button>
-        <button type="button" id="element_list__action_save" class="element_list__action_save">Save</button>
+        <button type="button" id="element_list__action_cancel" class="element_menu__action_cancel"></button>
+        <button type="button" id="element_list__action_save" class="element_list__action_save"></button>
+        <button type="button" id="element_list__action_invite_peple" class="element_list__action_invite_peple"></button>
+        <button type="button" id="element_list__action_invite_group" class="element_list__action_invite_group"></button>
       </div>
     </div>
     <ul id="element__list_lists" class="element_list__goods_list"></ul>
@@ -71,8 +76,36 @@
 
 <template id="element_list__items">
   <li class="element_list__goods_links">
-    <button id="elements__items_link" type="button"
-      class="element_list__goods_link"></button>
-    <button id="items_edit" class="items__edits" type="button">Buy</button>
+    <button id="elements__items_link" type="button" class="element_list__goods_link"></button>
+    <button id="items_edit" class="items__edits" type="button"></button>
+  </li>
+</template>
+
+{{!-- добовляем ползьвотеля или  группу к листу форма/балванка --}}
+<template id="massege_invite">
+  <div class="invite__list">
+    <h2 class="invite__title"></h2>
+    <ul id="invite__lists" class="invite__lists">
+      <li class="invite__links">
+        <input id="user_email_search" class="invite__input" type="text" placeholder="enter user login">
+        <button id="add__user" class="search__user">+</buttonid>
+      </li>
+    </ul>
+    <div class="massege_invite__action">
+      <button id="massege_invite__cancelBTN" class="massege_invite__cancelBTN" type="button">Cancel</button>
+      <button id="massege_invite__inviteBTN" class="massege_invite__inviteBTN" type="button">Invite</button>
+    </div>
+  </div>
+</template>
+
+<template id="userInfoInvite">
+  <li id="userInfoInvite__title" class="invite__user_info"></li>
+  <button class="remove__user">-</button>
+</template>
+
+<template id="invite__new_user_search">
+  <li class="invite__links">
+    <input id="user_email_search" class="invite__input" type="text" placeholder="enter user login">
+    <button id="add__user" class="search__user">+</button>
   </li>
 </template>
