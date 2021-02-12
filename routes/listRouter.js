@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { List, User } = require('../db/models');
+const bot = require('../bot');
 
 
 router.post('/', async (req, res) => {
@@ -16,9 +17,9 @@ router.post('/', async (req, res) => {
     const newList = new List({ title: addList_form__title, goods: goodsArrayObj, user: res.locals.user._id });
     console.log(newList);
     await newList.save();
-    await User.findByIdAndUpdate(res.locals.user._id, { $push: { lis } })
     res.redirect('/')
   } catch (error) {
+    console.log(error);
     res.sendStatus(500)
   }
 });
@@ -52,7 +53,20 @@ router.put('/', async (req, res) => {
   const { idList, idUser } = req.body;
   try {
     const listDb = await List.findByIdAndUpdate(idList, { guestList: idUser });
-    const newList = await List.findById(idList);
+    const newList = await List.findById(idList).populate('user');
+
+    if (Array.isArray(idUser)) {
+      idUser.forEach(async (idUser) => {
+        const userDb = await User.findById(idUser);
+        if (userDb && userDb.telegramID) {
+          const stringGoods = newList.goods.reduce((acc, {title}) =>  acc += '<i>' + title + '</i>\n' , '');
+          console.log(newList.goods);
+          bot.telegram.sendMessage(userDb.telegramID,
+            `Вы добавлены в список ${newList.title}, созданный ${newList.user.firstName}, состоящий из:\n ${stringGoods}`, { parse_mode: "HTML" });
+        }
+      }
+      )
+    }
 
     res.status(200).json(newList);
   } catch (err) {
