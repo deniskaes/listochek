@@ -41,7 +41,7 @@ function navigationShowGroup() {
 
 function navigationShowList() {
   console.log('asd');
-  window.location.replace('http://localhost:3000');
+  window.location.replace('/');
   activeMap.classList.toggle('hide');
   activeMap = show_lists;
   show_lists.classList.toggle('hide');
