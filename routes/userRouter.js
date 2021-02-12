@@ -44,9 +44,10 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/:email', async (req, res) => {
+  console.log('========email', req.params);
   try {
     const { email } = req.params;
-    const userByemail = await User.findOne(email);
+    const userByemail = await User.findOne({ email });
     if (userByemail) {
       return res.status(200).json(userByemail)
     } else {
