@@ -45,13 +45,13 @@ router.post('/update', async (req, res) => {
     listDb.guestList.forEach(async (el)=>{
       const userDb = await User.findById(el);
       if (userDb && userDb.telegramID){
-        bot.telegram.sendMessage(userDb.telegramID, `Обноивлся список ${updatedList.title}`);
+        bot.telegram.sendMessage(userDb.telegramID, `Обновился список ${updatedList.title}`);
       }
     });
     console.log(listDb.user);
     if (listDb.user.telegramID){
       console.log('adsasdads');
-    bot.telegram.sendMessage(listDb.user.telegramID, `Обноивлся список ${updatedList.title}`);
+    bot.telegram.sendMessage(listDb.user.telegramID, `Обновился список ${updatedList.title}`);
     }
     res.sendStatus(200);
   } catch (error) {
