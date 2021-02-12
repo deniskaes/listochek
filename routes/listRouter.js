@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { List } = require('../db/models');
+const { List, User } = require('../db/models');
 
 router.post('/', async (req, res) => {
   const { addList_form__title, goods } = req.body;
@@ -15,6 +15,7 @@ router.post('/', async (req, res) => {
     const newList = new List({ title: addList_form__title, goods: goodsArrayObj, user: res.locals.user._id });
     console.log(newList);
     await newList.save();
+    await User.findByIdAndUpdate(res.locals.user._id, {$push:{lis}})
     res.redirect('/')
   } catch (error) {
     res.sendStatus(500)
